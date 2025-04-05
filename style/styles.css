@@ -12,6 +12,9 @@ body {
     z-index: 1000;
     width: 80%;
     max-width: 300px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .slider {
@@ -21,25 +24,15 @@ body {
 
 .canva {
     display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 footer {
     opacity: 0.2;
     color: #bbb;
     position: fixed;
-    bottom: 0;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-}
-
-.dot {
-    height: 5px;
-    width: 5px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
+    z-index: 1000;
 }

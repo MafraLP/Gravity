@@ -24,6 +24,13 @@ export class Canva {
         this.canvas.style.left = '50%';
         this.canvas.style.top = '50%';
         this.canvas.style.transform = 'translate(-50%, -50%)';
+
+        this.ctx.translate(this.canvas.width/2, this.canvas.height/2); // Mover para o centro
+        this.ctx.transform(1, 0.2, 0.8, 1, 0, 0); // Matriz de transformação para efeito de skew
+        // Alternativamente: ctx.rotate(), ctx.scale(), etc.
+
+        // Voltar para a origem 
+        this.ctx.translate(-this.canvas.width/2, -this.canvas.height/2);
         
         Canva.instance = this; 
     }

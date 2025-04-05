@@ -1,10 +1,10 @@
-import { Canva } from "./canva.js";
+import { Scene } from "./scene.js";
 
 export class App {
     constructor() {
         console.log("App constructor called");
-        this.canva = Canva.getInstance("canva");
-        console.log("Canva instance obtained");
+        this.scene = Scene.getInstance("canva");
+        console.log("Scene instance obtained");
         this.init();
     }
 
@@ -12,37 +12,25 @@ export class App {
         console.log("App initialized app");
         this.setupEventListeners();
         
-        // Desenhe alguns pontos iniciais
+        // Desenhar pontos iniciais
         const initialDots = document.getElementById("dot-amount-range").value;
         this.drawDots(initialDots);
     }
 
     drawDots(amount) {
         console.log("Drawing dots:", amount);
-        this.canva.clear();
         
         if (amount <= 0) return;
         
         // Calcula quantas linhas e colunas teremos na grade
-        const aspectRatio = this.canva.canvas.width / this.canva.canvas.height;
+        const aspectRatio = 1; // Agora trabalhamos com um canvas quadrado
         const cols = Math.ceil(Math.sqrt(amount * aspectRatio));
         const rows = Math.ceil(amount / cols);
         
-        const cellWidth = this.canva.canvas.width / cols;
-        const cellHeight = this.canva.canvas.height / rows;
-        const cellCenterX = cellWidth / 2;
-        const cellCenterY = cellHeight / 2;
-        
-        for (let count = 0; count < amount; count++) {
-            const row = Math.floor(count / cols);
-            const col = count % cols;
-            const x = col * cellWidth + cellCenterX;
-            const y = row * cellHeight + cellCenterY;
-                const radius = Math.min(cellWidth, cellHeight, 1); 
-                this.canva.drawCircle(x, y, radius);
-            this.canva.drawCircle(x, y, 1);
-        }
+        // Desenha os pontos na cena 3D
+        this.scene.drawPoints(amount, rows, cols);
     }
+    
     setupEventListeners() {
         console.log("Setting up event listeners");
         const slider = document.getElementById("dot-amount-range");
@@ -57,19 +45,17 @@ export class App {
             console.log("Slider event triggered!");
             let dotAmount = parseInt(event.target.value);
             
-            // Calcula a raiz quadrada aproximada
+            // Garantir que o número seja um quadrado perfeito
             let sqrt = Math.sqrt(dotAmount);
-            
-            // Arredonda para o inteiro mais próximo
             let roundedSqrt = Math.round(sqrt);
+            let perfectSquare = roundedSqrt * roundedSqrt;
             
-            // Calcula o quadrado perfeito mais próximo
-            dotAmount = roundedSqrt * roundedSqrt;
+            // Se o valor não for um quadrado perfeito, ajustar para o mais próximo
+            if (perfectSquare !== dotAmount) {
+                dotAmount = perfectSquare;
+                slider.value = dotAmount;
+            }
             
-            // Atualiza o valor do slider visualmente
-            event.target.value = dotAmount;
-            
-            console.log("Dot amount:", dotAmount);
             this.drawDots(dotAmount);
         };
 

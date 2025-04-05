@@ -1,0 +1,29 @@
+{
+  "name": "relatividade",
+  "version": "1.0.0",
+  "description": "Ideia inicial de fazer uma serie de pontos, que interagem em Z\r quando o \"planeta\" passarp or cima baseado na densidade dele",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MafraLP/Gravity.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MafraLP/Gravity/issues"
+  },
+  "homepage": "https://github.com/MafraLP/Gravity#readme",
+  "dependencies": {
+    "three": "^0.175.0"
+  },
+  "devDependencies": {
+    "vite": "^6.2.5"
+  }
+}
